@@ -4,7 +4,7 @@ inputs:
   mock-configuration:
     description: 'Mock configuration to use'
     required: false
-    default: 'epel-8-x86_64'
+    default: 'epel-8-x86_64-6'
   repo-host:
     description: 'Repository host URL for custom packages'
     required: false
@@ -23,5 +23,4 @@ runs:
   using: 'docker'
   image: 'docker://eljhoset/hello-build'
   args: 
-    - r 
-    - ${{ inputs.mock-configuration }}
+    - r ${{ inputs.mock-configuration }}
