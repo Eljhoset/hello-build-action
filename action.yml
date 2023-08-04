@@ -1,0 +1,29 @@
+name: 'Build RPM'
+description: 'Automate the process of building RPM packages and source RPMs from spec files'
+inputs:
+  mock-configuration:
+    description: 'Mock configuration to use'
+    required: false
+    default: 'epel-8-x86_64'
+  repo-host:
+    description: 'Repository host URL for custom packages'
+    required: false
+  srpm_output_folder:
+    description: 'Output folder for generated source RPM (SRPM) files'
+    required: true
+    default: '/srpm'
+  rpm_output_folder:
+    description: 'Output folder for generated RPM files'
+    required: true
+  spec_file:
+    description: 'List of spec files to build RPMs for'
+    required: true
+    default: '*.spec'
+runs:
+  using: 'docker'
+  image: 'docker://eljhoset/hello-build'
+  args:
+    - -r ${{ inputs.mock-configuration }}
+    - -s ${{ inputs.srpm_output_folder }}
+    - -o ${{ inputs.rpm_output_folder }}
+    - --repo-host ${{ inputs.repo-host }}
