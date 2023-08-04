@@ -22,5 +22,4 @@ inputs:
 runs:
   using: 'docker'
   image: 'docker://eljhoset/hello-build'
-  with:
-    args: -r ${{ inputs.mock-configuration }} --repo-host ${{ inputs.repo-host }} -s ${{ inputs.srpm_output_folder }} -o ${{ inputs.rpm_output_folder }} ${{ inputs.spec_file }}
+  args: -r ${{ inputs.mock-configuration }}
