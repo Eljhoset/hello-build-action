@@ -24,7 +24,7 @@ runs:
   steps:
     - name: Build using docker
       run: |
-        docker run --rm hello/build \
+        docker run --rm eljhoset/hello-build \
         -v $(pwd):/mnt \
         -w /mnt \
         -r ${{ inputs.rpm_output_folder }} \
