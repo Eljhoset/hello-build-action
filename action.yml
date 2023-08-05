@@ -8,6 +8,7 @@ inputs:
   repo-host:
     description: 'Repository host URL for custom packages'
     required: false
+    default: http://localhost
   srpm_output_folder:
     description: 'Output folder for generated source RPM (SRPM) files'
     required: true
