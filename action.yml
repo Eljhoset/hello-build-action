@@ -29,6 +29,6 @@ runs:
         -w /mnt \
         -r ${{ inputs.rpm_output_folder }} \
         --repo-host '${{ inputs.rpm_output_folder }}' \
-        - s ${{ inputs.srpm_output_folder }} \        
+        -s ${{ inputs.srpm_output_folder }} \        
         -o ${{ inputs.rpm_output_folder }} '${{ inputs.spec_file }}'
       shell: bash
