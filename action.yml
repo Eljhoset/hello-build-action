@@ -4,14 +4,14 @@ inputs:
   mock-configuration:
     description: 'Mock configuration to use'
     required: false
-    default: 'epel-8-x86_64-6'
+    default: epel-8-x86_64
   repo-host:
     description: 'Repository host URL for custom packages'
     required: false
   srpm_output_folder:
     description: 'Output folder for generated source RPM (SRPM) files'
     required: true
-    default: '/srpm'
+    default: /srpm
   rpm_output_folder:
     description: 'Output folder for generated RPM files'
     required: true
@@ -20,10 +20,14 @@ inputs:
     required: true
     default: '*.spec'
 runs:
-  using: 'docker'
-  image: 'docker://eljhoset/hello-build'
-  args:
-    - -r ${{ inputs.mock-configuration }}
-    - -s ${{ inputs.srpm_output_folder }}
-    - -o ${{ inputs.rpm_output_folder }}
-    - --repo-host ${{ inputs.repo-host }}
+  using: 'composite'
+  steps:
+    - name: Build using docker
+      run: |
+        docker run -it --rm hello/build \
+        -v $(pwd):/mnt \
+        -w /mnt \
+        -r ${{ inputs.rpm_output_folder }} \
+        --repo-host '${{ inputs.rpm_output_folder }}' \
+        - s ${{ inputs.srpm_output_folder }} \        
+        -o ${{ inputs.rpm_output_folder }} '${{ inputs.spec_file }}'
