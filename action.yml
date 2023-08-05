@@ -24,5 +24,5 @@ runs:
   steps:
     - name: Build using docker
       run: |
-        docker run --rm -v $(pwd):/mnt -w /mnt eljhoset/hello-build -r ${{ inputs.mock-configuration }} --repo-host '${{ inputs.rpm_output_folder }}' -s ${{ inputs.srpm_output_folder }} -o ${{ inputs.rpm_output_folder }} '${{ inputs.spec_file }}'
+        docker run --cap-add=SYS_ADMIN --rm -v $(pwd):/mnt -w /mnt eljhoset/hello-build -r ${{ inputs.mock-configuration }} --repo-host '${{ inputs.rpm_output_folder }}' -s ${{ inputs.srpm_output_folder }} -o ${{ inputs.rpm_output_folder }} '${{ inputs.spec_file }}'
       shell: bash
