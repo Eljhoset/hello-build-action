@@ -22,7 +22,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - id: Build using docker
+    - name: Build using docker
       run: |
         docker run -it --rm hello/build \
         -v $(pwd):/mnt \
