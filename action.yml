@@ -41,10 +41,11 @@ runs:
       uses: 'google-github-actions/setup-gcloud@v1'
     - name: Cache Mock
       uses: actions/cache@v3
-      path: |
-        ~/mock/cache
-        ~/mock/lib
-      key: ${{ runner.os }}-mock-${{ inputs.repo-host }}
+      with:
+        path: |
+          ~/mock/cache
+          ~/mock/lib
+        key: ${{ runner.os }}-mock-${{ inputs.repo-host }}
       restore-keys: |
         ${{ runner.os }}-mock-
     - name: Build using docker
