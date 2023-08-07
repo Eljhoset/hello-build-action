@@ -31,6 +31,3 @@ runs:
         docker run --privileged=true --rm -v $(pwd):/mnt -v ${{ inputs.rpm_output_folder }}:/rpm -w /mnt --add-host server:127.0.0.1 eljhoset/hello-build
         -r ${{ inputs.mock-configuration }} --repo-host '${{ inputs.repo-host }}' -s ${{ inputs.srpm_output_folder }} -o /rpm '${{ inputs.spec_file }}'
       shell: bash
-    - name: Set output
-      run: echo "result=$(ls ${{ inputs.rpm_output_folder }})" >> $GITHUB_OUTPUT
-      shell: bash
