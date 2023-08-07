@@ -46,8 +46,8 @@ runs:
           ~/mock/cache
           ~/mock/lib
         key: ${{ runner.os }}-mock-${{ inputs.repo-host }}
-      restore-keys: |
-        ${{ runner.os }}-mock-
+        restore-keys: |
+          ${{ runner.os }}-mock-
     - name: Build using docker
       run: >
         docker run --privileged=true --rm 
