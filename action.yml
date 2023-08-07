@@ -45,10 +45,10 @@ runs:
         -r ${{ inputs.mock-configuration }} --repo-host '${{ inputs.repo-host }}' -s ${{ inputs.srpm_output_folder }} -o /rpm '${{ inputs.spec_file }}'
       shell: bash
     - name: Upload to GCP Artifact Registry
-        run: |
-          RPMS=$(ls $GITHUB_WORKSPACE/${{ inputs.rpm_output_folder }}/*.rpm | grep -vE '(src|debug)')
-          gcloud config set artifacts/repository gcp-repo
-          gcloud config set artifacts/location us-east1          
-          gcloud artifacts yum upload --source=$RPMS
-          echo "result=$RPMS" >> $GITHUB_OUTPUT
-        shell: bash
+      run: |
+        RPMS=$(ls $GITHUB_WORKSPACE/${{ inputs.rpm_output_folder }}/*.rpm | grep -vE '(src|debug)')
+        gcloud config set artifacts/repository gcp-repo
+        gcloud config set artifacts/location us-east1          
+        gcloud artifacts yum upload --source=$RPMS
+        echo "result=$RPMS" >> $GITHUB_OUTPUT
+      shell: bash
