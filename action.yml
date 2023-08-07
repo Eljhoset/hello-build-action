@@ -45,7 +45,7 @@ runs:
         path: |
           ~/mock/cache
           ~/mock/lib
-        key: ${{ runner.os }}-mock-${{ inputs.repo-host }}
+        key: ${{ runner.os }}-mock-${{ hashFiles('**/*.spec') }}
         restore-keys: |
           ${{ runner.os }}-mock-
     - name: Build using docker
