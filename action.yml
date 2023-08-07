@@ -26,6 +26,13 @@ outputs:
 runs:
   using: 'composite'
   steps:
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
+        service_account: ${{ secrets.SERVICE_ACCOUNT }}
+    - name: Set up Cloud SDK
+      uses: 'google-github-actions/setup-gcloud@v1'
     - name: Build using docker
       run: >
         docker run --privileged=true --rm -v $(pwd):/mnt -v ${{ inputs.rpm_output_folder }}:/rpm -w /mnt --add-host server:127.0.0.1 eljhoset/hello-build
@@ -34,3 +41,8 @@ runs:
     - name: Set output
       run: echo "result=$(ls ${{ inputs.rpm_output_folder }})" >> $GITHUB_OUTPUT
       shell: bash
+    - name: Upload to Artifact Registry
+        run: |
+          gcloud config set artifacts/repository gcp-repo
+          gcloud config set artifacts/location us-east1          
+          gcloud artifacts yum upload --source=$(ls $GITHUB_WORKSPACE/${{ inputs.rpm_output_folder }}/*.rpm | grep -vE '(src|debug)')
