@@ -1,4 +1,4 @@
-name: 'Build RPM'
+name: 'Build and Upload RPM'
 description: 'Automate the process of building RPM packages and source RPMs from spec files'
 inputs:
   workload_identity_provider_id:
