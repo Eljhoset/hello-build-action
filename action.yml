@@ -39,7 +39,7 @@ runs:
         service_account: ${{ inputs.service_account }}
     - name: Set up Cloud SDK
       uses: 'google-github-actions/setup-gcloud@v1'
-        - name: Cache Mock
+    - name: Cache Mock
       uses: actions/cache@v3
       path: |
         ~/mock/cache
