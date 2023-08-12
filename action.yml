@@ -26,12 +26,13 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - name: Restore mock cache
-      id: cache-mock-restore
-      uses: actions/cache/restore@v3
+    - name: Mock cache
+      uses: actions/cache@v3
       with:
         path:  ~/mock/cache
-        key: ${{ runner.os }}-mock-cache-${{ hashFiles('** ~/mock/cache') }}
+        key: ${{ runner.os }}-mock-${{ hashFiles('** ~/mock/cache') }}
+      restore-keys: |
+        ${{ runner.os }}-mock-
     - name: Build using docker
       run: >
         docker run --privileged=true --rm 
@@ -42,11 +43,6 @@ runs:
         -w /mnt --add-host server:127.0.0.1 eljhoset/hello-build
         -r ${{ inputs.mock-configuration }} --repo-host '${{ inputs.repo-host }}' -s ${{ inputs.srpm_output_folder }} -o /rpm '${{ inputs.spec_file }}'
       shell: bash
-    - name: Save mock cache
-      uses: actions/cache/save@v3
-      with:
-        path:  ~/mock/cache
-        key: ${{ steps.cache-mock-restore.outputs.cache-primary-key }}
     - name: upload artifact
       uses: actions/upload-artifact@v3
       with:
