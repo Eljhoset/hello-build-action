@@ -32,6 +32,12 @@ runs:
       with:
         path:  ~/mock/cache
         key: ${{ runner.os }}-mock-cache-${{ hashFiles('** ~/mock/cache') }}
+    - name: Restore mock lib
+      id: cache-mock-lib-restore
+      uses: actions/cache/restore@v3
+      with:
+        path:  ~/mock/lib
+        key: ${{ runner.os }}-mock-lib-${{ hashFiles('** ~/mock/lib') }} 
     - name: Build using docker
       run: >
         docker run --privileged=true --rm 
@@ -47,3 +53,8 @@ runs:
       with:
         path:  ~/mock/cache
         key: ${{ steps.cache-mock-restore.outputs.cache-primary-key }}
+    - name: Save mock lib
+      uses: actions/cache/save@v3
+      with:
+        path: ~/mock/lib
+        key: ${{ steps.cache-mock-lib-restore.outputs.cache-primary-key }}
