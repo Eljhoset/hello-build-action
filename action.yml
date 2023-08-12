@@ -31,8 +31,8 @@ runs:
       with:
         path:  ~/mock/cache
         key: ${{ runner.os }}-mock-${{ hashFiles('** ~/mock/cache') }}
-      restore-keys: |
-        ${{ runner.os }}-mock-
+        restore-keys: |
+          ${{ runner.os }}-mock-
     - name: Build using docker
       run: >
         docker run --privileged=true --rm 
