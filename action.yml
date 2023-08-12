@@ -26,6 +26,12 @@ outputs:
 runs:
   using: 'composite'
   steps:
+    - name: Restore cached mock
+      id: cache-mock-restore
+      uses: actions/cache/restore@v3
+      with:
+        path: /mock/cache
+        key: ${{ runner.os }}-mock-cache-${{ hashFiles('**/mock/cache') }}
     - name: Build using docker
       run: >
         docker run --privileged=true --rm 
@@ -40,4 +46,4 @@ runs:
       uses: actions/cache@v3
       with:
         path: /mock/cache
-        key: ${{ runner.os }}-mock-cache-${{ hashFiles('**/mock/cache') }}
+        key: ${{ steps.cache-mock-restore.outputs.cache-primary-key }}
