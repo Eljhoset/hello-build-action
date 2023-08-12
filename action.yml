@@ -47,8 +47,8 @@ runs:
       with:
         path:  ~/mock/cache
         key: ${{ steps.cache-mock-restore.outputs.cache-primary-key }}
-   - name: upload artifact
-     uses: actions/upload-artifact@v3
-     with:
-       name: ${{github.repository }}
-       path: ${{ inputs.rpm_output_folder }}/*.rpm
+    - name: upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{github.repository }}
+        path: ${{ inputs.rpm_output_folder }}/*.rpm
