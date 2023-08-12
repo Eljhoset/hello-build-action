@@ -30,7 +30,9 @@ runs:
       id: cache-mock-restore
       uses: actions/cache/restore@v3
       with:
-        path:  ~/mock/cache
+        path: |
+          ~/mock/cache
+          ~/mock/lib
         key: ${{ runner.os }}-mock-cache-
     - name: Build using docker
       run: >
@@ -45,5 +47,7 @@ runs:
     - name: Save mock cache
       uses: actions/cache/save@v3
       with:
-        path:  ~/mock/cache
+        path: |
+          ~/mock/cache
+          ~/mock/lib
         key: ${{ steps.cache-mock-restore.outputs.cache-primary-key }}
