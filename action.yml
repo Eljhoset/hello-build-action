@@ -35,6 +35,7 @@ runs:
         key: ${{ runner.os }}-mock-${{ inputs.mock-configuration }}
         restore-keys: |
           ${{ runner.os }}-mock-
+        fail-on-cache-miss: true
     - name: Build using docker
       run: >
         docker run --privileged=true --rm 
