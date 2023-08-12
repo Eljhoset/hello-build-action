@@ -32,7 +32,7 @@ runs:
         path: |
           ~/mock/cache
           ~/mock/lib
-        key: ${{ runner.os }}-mock-${{ inputs.mock-configuration }}
+        key: mock-${{ inputs.mock-configuration }}
         restore-keys: |
           ${{ runner.os }}-mock-
     - name: Build using docker
