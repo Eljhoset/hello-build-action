@@ -50,5 +50,5 @@ runs:
     - name: upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: ${{github.repository }}
+        name: rpm
         path: ${{ inputs.rpm_output_folder }}/*.rpm
