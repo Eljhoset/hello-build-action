@@ -37,7 +37,7 @@ runs:
       uses: actions/cache/restore@v3
       with:
         path:  ~/mock/lib
-        key: ${{ runner.os }}-mock-lib-${{ hashFiles('** ~/mock/lib') }} 
+        key: ${{ runner.os }}-lib-${{ hashFiles('** ~/mock/lib') }} 
     - name: Build using docker
       run: >
         docker run --privileged=true --rm 
